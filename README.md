@@ -12,6 +12,8 @@ The solution to this project will be given to you after you have completed it. Y
 
 https://github.com/CodeYourFuture/tv-show-dom-project-solution
 
+my netlify url 
+https://cyf-abubakar-meigag-tv.netlify.app/
 
 Checkpoint:
 
