@@ -14,11 +14,10 @@ function makePageForEpisodes(episodeList) {
 
   for (let list of episodeList) {
     let episodeDiv = document.createElement("div");
+    episodeDiv.classList.add("newDiv");
     // let title = document.createElement("h2");
     // let img = document.createElement("img");
     // let p = document.createElement("p");
-
-    episodeDiv.classList.add("newDiv");
 
     episodeDiv.innerHTML = `
       <h2>${list.name} - S${list.season
