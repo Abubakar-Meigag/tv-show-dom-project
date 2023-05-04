@@ -12,10 +12,22 @@
     <div id="root">
     </div>
 
-    <div id="allEp">
-    
+      
+
+    <div id="search">
+      <input id="searchInput" onkeyup="mySearch()" type="text" placeholder="Search">
+      <div id="search-count"></div>
     </div>
 
+    
+    <div id="allEp">
+    </div>
+
+
+    <!-- No Results -->
+    <div id="no-result" class="hide">No results found - all this data is from TVMaze.com</div>
+    </div>
+    
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
 
