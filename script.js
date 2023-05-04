@@ -6,38 +6,64 @@ function setup() {
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  rootElem.textContent = `Got ${episodeList.length} episode(s) All this data is from TVMaze.com`;
 
   //my code
 
+  // create all div episodes
+
   let allEp = document.getElementById("allEp");
 
-  for (let list of episodeList) {
+  episodeList.map((el) => {
     let episodeDiv = document.createElement("div");
     episodeDiv.classList.add("newDiv");
-    // let title = document.createElement("h2");
-    // let img = document.createElement("img");
-    // let p = document.createElement("p");
 
     episodeDiv.innerHTML = `
-      <h2>${list.name} - S${list.season
+    <h2>${el.name} - S${el.season.toString().padStart(2, "0")}E${el.number
       .toString()
-      .padStart(2, "0")}E${list.number.toString().padStart(2, "0")}</h2>
-      <img src="${list.image.medium}">
-      <p>${list.summary}</p>
+      .padStart(2, "0")}</h2>
+    <img src="${el.image.medium}">
+    <span>${el.summary}</span>
     `;
 
-    // let title = episodeDiv.querySelector('h2');
-    // let img = episodeDiv.querySelector('img');
-    // let p = episodeDiv.querySelector('p');
-
-    // title.innerHTML = `${list.name} - S${list.season
-    //   .toString()
-    //   .padStart(2, "0")}E${list.number.toString().padStart(2, "0")}`;
-    // img.src = list.image.medium;
-    // p = list.summary;
-
     allEp.appendChild(episodeDiv);
+  });
+}
+
+// create search bar
+
+function mySearch() {
+  let searchInput = document.getElementById("searchInput").value.toLowerCase();
+  let cardElements = document.getElementsByClassName("newDiv"); 
+
+  let hasResults = false;
+  let searchCount = 0;
+  
+  for (let i = 0; i < cardElements.length; i++) {
+    let cardElement = cardElements[i];
+      
+    let h2Element = cardElement.querySelector("h2");
+    let pElement = cardElement.querySelector("span");
+
+    if (
+      h2Element.innerHTML.toLowerCase().indexOf(searchInput) > -1 ||
+      pElement.innerHTML.toLowerCase().indexOf(searchInput) > -1
+    ) {
+      cardElement.classList.remove("hide");
+      hasResults = true;
+      searchCount += 1;
+    } else {
+      cardElement.classList.add("hide");
+    }
+  }
+
+  let searchDiv = document.getElementById("search-count");
+  searchDiv.innerText = `Display ${searchCount} / 73 episodes`;
+
+  if (!hasResults) {
+    document.getElementById("no-result").style.display = "block";
+  } else {
+    document.getElementById("no-result").style.display = "none";
   }
 }
 
