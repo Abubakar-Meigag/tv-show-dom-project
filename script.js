@@ -4,6 +4,8 @@ function setup() {
   makePageForEpisodes(allEpisodes);
 }
 
+// create all episodes level 100
+
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.textContent = `Got ${episodeList.length} episode(s) All this data is from TVMaze.com`;
@@ -30,9 +32,9 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
-// create search bar
+// create search bar level 200
 
-function mySearch() {
+function episodesSearch() {
   let searchInput = document.getElementById("searchInput").value.toLowerCase();
   let cardElements = document.getElementsByClassName("newDiv"); 
 
@@ -66,5 +68,10 @@ function mySearch() {
     document.getElementById("no-result").style.display = "none";
   }
 }
+
+
+
+
+
 
 window.onload = setup;
