@@ -9,6 +9,10 @@ grid-template-columns: repeat(2, 1fr);
 grid-template-rows: 40px 40px; */
 /* grid-template-columns: repeat(auto-fill, minmax(390px, 1fr)); */
 
+body{
+  background-color: #a8adb6;
+}
+
 #search {
   display: flex;
   padding: 7px;
@@ -35,8 +39,11 @@ input{
   margin-left: 20px;
   width: 390px;
   height: 490px;
-  background-color: black;
-  color: white;
+  background-color: #3d5a80;
+  color: #cbf5f7;
+  border-radius: 3%;
+  border: 1px solid #1c2a63;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.30), 0 10px 10px rgba(0, 0, 0, 0.42);
 }
 
 .newDiv > h2 {
@@ -49,6 +56,8 @@ input{
 
 .newDiv > img {
   margin: 0px 70px;
+  border-radius: 3%;
+  border: 1.6px solid #bcc3cb;;
 }
 
 .newDiv > span{
