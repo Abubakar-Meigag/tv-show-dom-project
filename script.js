@@ -52,9 +52,14 @@ function episodesSearch() {
     let h2Element = cardElement.querySelector("h2");
     let pElement = cardElement.querySelector("span");
 
+    // if (
+    //   h2Element.innerHTML.toLowerCase().indexOf(searchInput) > -1 ||
+    //   pElement.innerHTML.toLowerCase().indexOf(searchInput) > -1
+    // )
+    
     if (
-      h2Element.innerHTML.toLowerCase().indexOf(searchInput) > -1 ||
-      pElement.innerHTML.toLowerCase().indexOf(searchInput) > -1
+      h2Element.innerHTML.toLowerCase().includes(searchInput) ||
+      pElement.innerHTML.toLowerCase().includes(searchInput)
     ) {
       cardElement.classList.remove("hide");
       hasResults = true;
@@ -95,11 +100,13 @@ function episodeSelector() {
     episodes.forEach((episode) => {
       let h2Element = episode.querySelector("h2");
 
-      if (h2Element.innerHTML.indexOf(selected) > -1) {
-        episode.style.display = "block";
-      } else {
-        episode.style.display = "none";
-      }
+      // if (h2Element.innerHTML.indexOf(selected) > -1)
+
+        if (h2Element.innerHTML.includes(selected)) {
+          episode.style.display = "block";
+        } else {
+          episode.style.display = "none";
+        }
     });
   });
 }
