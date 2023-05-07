@@ -7,7 +7,6 @@ function setup() {
 }
 
 // create all episodes level 100
-// let episodeList = makePageForEpisodes();
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -34,8 +33,8 @@ function makePageForEpisodes(episodeList) {
     allEp.appendChild(episodeDiv);
   });
 }
-  
 
+window.onload = setup;
 
 
 // create search bar level 200
@@ -77,26 +76,33 @@ function episodesSearch() {
 
 // create Episode Selector level 300
 
-let selector = document.getElementById("cards");
-selector.innerHTML = `<option value="Please choose episode">Please choose episode</option>`;
+function episodeSelector() {
+  let selector = document.getElementById("select");
+  selector.innerHTML = `<option value="Please choose episode">Please choose episode</option>`;
 
-let optionList = allEpisodes.forEach(el => {
-  let options = document.createElement('option')
-  options.value = el.name;
-  options.text = el.name
-  
-  selector.appendChild(options)
+  allEpisodes.forEach((el) => {
+    let options = document.createElement("option");
+    options.value = el.name;
+    options.text = `${el.name} - S${el.season.toString().padStart(2, "0")}E${el.number.toString().padStart(2, "0")}`;
 
-})
-  selector.addEventListener("change", (ele) => {
-    let val = ele.target.value;
-    console.log(val);
+    selector.appendChild(options);
   });
 
-function episodesSelector(){
+  selector.addEventListener("change", function () {
+    let selected = selector.value;
+    let episodes = Array.from(document.getElementsByClassName("newDiv"));
 
+    episodes.forEach((episode) => {
+      let h2Element = episode.querySelector("h2");
+
+      if (h2Element.innerHTML.indexOf(selected) > -1) {
+        episode.style.display = "block";
+      } else {
+        episode.style.display = "none";
+      }
+    });
+  });
 }
 
-window.onload = setup;
-
+episodeSelector();
 
