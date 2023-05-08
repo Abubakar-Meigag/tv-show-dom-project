@@ -2,6 +2,8 @@
 let allEpisodes = getAllEpisodes();
 
 function setup() {
+  // call API fetch store respones in allEpisodes array 
+  // remove line 7 
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
@@ -56,7 +58,7 @@ function episodesSearch() {
     //   h2Element.innerHTML.toLowerCase().indexOf(searchInput) > -1 ||
     //   pElement.innerHTML.toLowerCase().indexOf(searchInput) > -1
     // )
-    
+
     if (
       h2Element.innerHTML.toLowerCase().includes(searchInput) ||
       pElement.innerHTML.toLowerCase().includes(searchInput)
@@ -88,7 +90,9 @@ function episodeSelector() {
   allEpisodes.forEach((el) => {
     let options = document.createElement("option");
     options.value = el.name;
-    options.text = `${el.name} - S${el.season.toString().padStart(2, "0")}E${el.number.toString().padStart(2, "0")}`;
+    options.text = `S${el.season.toString().padStart(2, "0")}E${el.number
+      .toString()
+      .padStart(2, "0")} - ${el.name}`;
 
     selector.appendChild(options);
   });
