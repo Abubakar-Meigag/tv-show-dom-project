@@ -2,8 +2,6 @@
 let allEpisodes = getAllEpisodes();
 
 function setup() {
-  // call API fetch store respones in allEpisodes array 
-  // remove line 7 
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
@@ -38,19 +36,18 @@ function makePageForEpisodes(episodeList) {
 
 window.onload = setup;
 
-
 // create search bar level 200
 
 function episodesSearch() {
   let searchInput = document.getElementById("searchInput").value.toLowerCase();
-  let cardElements = document.getElementsByClassName("newDiv"); 
+  let cardElements = document.getElementsByClassName("newDiv");
 
   let hasResults = false;
   let searchCount = 0;
-  
+
   for (let i = 0; i < cardElements.length; i++) {
     let cardElement = cardElements[i];
-      
+
     let h2Element = cardElement.querySelector("h2");
     let pElement = cardElement.querySelector("span");
 
@@ -85,7 +82,7 @@ function episodesSearch() {
 
 function episodeSelector() {
   let selector = document.getElementById("select");
-  selector.innerHTML = `<option value="Please choose episode">Please choose episode</option>`;
+  selector.innerHTML = `<option value="All">Please choose episode</option>`;
 
   allEpisodes.forEach((el) => {
     let options = document.createElement("option");
@@ -93,7 +90,6 @@ function episodeSelector() {
     options.text = `S${el.season.toString().padStart(2, "0")}E${el.number
       .toString()
       .padStart(2, "0")} - ${el.name}`;
-
     selector.appendChild(options);
   });
 
@@ -101,19 +97,16 @@ function episodeSelector() {
     let selected = selector.value;
     let episodes = Array.from(document.getElementsByClassName("newDiv"));
 
-    episodes.forEach((episode) => {
+    episodes.filter((episode) => {
       let h2Element = episode.querySelector("h2");
 
-      // if (h2Element.innerHTML.indexOf(selected) > -1)
-
-        if (h2Element.innerHTML.includes(selected)) {
-          episode.style.display = "block";
-        } else {
-          episode.style.display = "none";
-        }
+      if (selected === "All" || h2Element.innerHTML.includes(selected)) {
+        episode.style.display = "block";
+      } else {
+        episode.style.display = "none";
+      }
     });
   });
 }
 
 episodeSelector();
-
