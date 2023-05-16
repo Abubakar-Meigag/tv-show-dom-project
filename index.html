@@ -10,35 +10,39 @@
 </head>
 
 <body>
+
+  <div id="all-search">
+
+    <!-- select bar for moves -->
+    <select name="moves-bar" id="moves-bar" class="moves-bar">
+    </select>
+
+    <!-- select bar for episodes  -->
+    <select name="select" id="select">
+    </select>
+
+    <!-- search input  -->
+    <div id="search">
+      <input id="searchInput" onkeyup="episodesSearch()" type="text" placeholder="Search">
+      <div id="search-count"></div>
+
+      <!-- No Results -->
+      <div id="no-result" class="hide">No results found - all this data is from TVMaze.com</div>
+    </div>
+  </div>
+
+
   <div id="root">
   </div>
 
-  <!-- search input  -->
-  <div id="search">
-    <input id="searchInput" onkeyup="episodesSearch()" type="text" placeholder="Search">
-    <div id="search-count"></div>
-    
-    <!-- No Results -->
-    <div id="no-result" class="hide">No results found - all this data is from TVMaze.com</div>
-  </div>
-  </div>
-
-  <!-- select bar  -->
-  <select name="select" id="select">
-  </select>
-
-
   <!-- episodes container div  -->
-
   <div id="allEp"></div>
-
-
-
 
   <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
   <script src="episodes.js"></script>
 
   <!-- Loads YOUR javascript code -->
+  <script src="shows.js"></script>
   <script src="script.js"></script>
 </body>
 
