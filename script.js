@@ -4,7 +4,7 @@ function setup() {}
 
 window.onload = setup;
 
-//===== ** fetch for level 400 **
+
 // create all showList in the select bar level 400
 
 let allMoves = getAllShows();
@@ -17,31 +17,9 @@ allMoves.sort(function (y, z) {
   return y.name.localeCompare(z.name);
 });
 
-
-
-// function selectMoves() {
-//   let moveSelector = movesList.value;
-//   let selectedMove = allMoves.filter((Show) => moveSelector == Show.name);
-
-//   let ShowId = selectedMove[0].id;
-
-//   fetch(`https://api.tvmaze.com/shows/${ShowId}/episodes`)
-//     .then((res) => res.json())
-//     .then((data) => {
-//       makePageForEpisodes(data);
-//       episodeSelector(data);
-//       let allMyData = data
-//       console.log("here is are", allMyData);
-
-//       return allMyData;
-//     })
-//     .catch((error) => {
-//       console.log(`some thing wrong:`, error);
-//       throw error;
-//     })
-// }
-
 // create all episodes level 100
+
+ let allEp = document.getElementById("allEp");
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -50,27 +28,33 @@ function makePageForEpisodes(episodeList) {
   //my code
 
   // create container div to hold all episodes
-  let allEp = document.getElementById("allEp");
+ 
 
   episodeList.map((el) => {
     // create div for each episode and give class div
     let episodeDiv = document.createElement("div");
     episodeDiv.classList.add("newDiv");
 
-    // create elements h2, img and span for episodes article
-    episodeDiv.innerHTML = `
+
+    if(el.image){
+       episodeDiv.innerHTML = `
     <h2> S${el.season.toString().padStart(2, "0")}E${el.number
-      .toString()
-      .padStart(2, "0")} - ${el.name} </h2>
+         .toString()
+         .padStart(2, "0")} - ${el.name} </h2>
     <img src="${el.image.medium}">
     <span>${el.summary}</span>
     `;
-   
-    // add episodes as card to container div
-    console.log("div", episodeDiv);
-    debugger
+
+    }else{
+       episodeDiv.innerHTML = `
+    <h2> S${el.season.toString().padStart(2, "0")}E${el.number
+         .toString()
+         .padStart(2, "0")} - ${el.name} </h2>
+    <span>${el.summary}</span>
+    `;
+    }
+
     allEp.appendChild(episodeDiv);
-    rootElem.appendChild(allEp);
   });
 }
 
@@ -122,21 +106,17 @@ function episodeSelector() {
   let selector = document.getElementById("select");
   selector.innerHTML = `<option value="All">Please choose episode</option>`;
 
-  if (selector) {
-    selector.innerHTML = "";
-  }
+  allEpisodes.forEach((episode) => {
+    let opt = document.createElement("option");
+    opt.value = episode.name;
+    opt.text = `S${episode.season
+      .toString()
+      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${
+      episode.name
+    }`;
 
-  // allEpisodes.forEach((episode) => {
-  //   let opt = document.createElement("option");
-  //   opt.value = episode.name;
-  //   opt.text = `S${episode.season
-  //     .toString()
-  //     .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${
-  //     episode.name
-  //   }`;
-
-  //   selector.appendChild(opt);
-  // });
+    selector.appendChild(opt);
+  });
 
   selector.addEventListener("change", selectCreator);
 
@@ -161,11 +141,14 @@ episodeSelector();
 
 // level 400
 
+//===== ** fetch for level 400 **
+
+
 function allMovesShow() {
   allMoves.forEach((element) => {
     let moveOption = document.createElement("option");
     moveOption.innerText = element.name;
-
+    
     movesList.appendChild(moveOption);
   });
 }
@@ -176,7 +159,7 @@ allMovesShow();
 movesList.addEventListener("change", function () {
   let moveSelector = movesList.value;
   let selectedMove = allMoves.filter((Show) => moveSelector == Show.name);
-
+  allEp.innerHTML = ""; 
   let ShowId = selectedMove[0].id;
 
   fetch(`https://api.tvmaze.com/shows/${ShowId}/episodes`)
@@ -186,8 +169,7 @@ movesList.addEventListener("change", function () {
       }
     })
     .then((data) => {
-      console.log("here is are", data);
-
+      // console.log("here is are", data);
       allEpisodes = data;
       makePageForEpisodes(allEpisodes);
       episodeSelector(allEpisodes);
