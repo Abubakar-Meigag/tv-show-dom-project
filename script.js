@@ -1,56 +1,45 @@
-// let allEpisodes;
+let allEpisodes = getAllEpisodes();
 
-// function setup() {
-//   //  allEpisodes = fetchLink();
-//   // const allEpisodes = getAllEpisodes();
-//   // makePageForEpisodes(allEpisodes);
-// }
+function setup() {}
 
-// window.onload = setup;
+window.onload = setup;
 
 //===== ** fetch for level 400 **
 // create all showList in the select bar level 400
 
+let allMoves = getAllShows();
+
 let movesList = document.getElementById("moves-bar");
 movesList.innerHTML = `<option value="all-show">Please choose Show</option>`;
 
-let allMoves = getAllShows();
-
-// sort all shows from A to Z 
-
+// sort all shows from A to Z
 allMoves.sort(function (y, z) {
   return y.name.localeCompare(z.name);
 });
 
 
-function allMovesShow() {
-  allMoves.forEach((ele) => {
-    let moveOption = document.createElement("option");
-    moveOption.innerText = ele.name;
 
-    movesList.appendChild(moveOption);
-  });
-}
-allMovesShow();
+// function selectMoves() {
+//   let moveSelector = movesList.value;
+//   let selectedMove = allMoves.filter((Show) => moveSelector == Show.name);
 
-movesList.addEventListener("change", selectMoves)
+//   let ShowId = selectedMove[0].id;
 
-function selectMoves() {
-  let moveSelector = movesList.value;
-  let selectedMove = allMoves.filter(
-    (oneShow) => moveSelector === oneShow.name);
-  
-  let selectedShowId = selectedMove[0].id;
+//   fetch(`https://api.tvmaze.com/shows/${ShowId}/episodes`)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       makePageForEpisodes(data);
+//       episodeSelector(data);
+//       let allMyData = data
+//       console.log("here is are", allMyData);
 
-  fetch(`https://api.tvmaze.com/shows/${selectedShowId}/episodes`)
-      .then((res) => res.json())
-      .then((data) => {
-        makePageForEpisodes(data);
-        episodeSelector(data);
-      })
-      .catch((error) => console.log(`some thing wrong:`, error));
-  
-};
+//       return allMyData;
+//     })
+//     .catch((error) => {
+//       console.log(`some thing wrong:`, error);
+//       throw error;
+//     })
+// }
 
 // create all episodes level 100
 
@@ -76,7 +65,10 @@ function makePageForEpisodes(episodeList) {
     <img src="${el.image.medium}">
     <span>${el.summary}</span>
     `;
+   
     // add episodes as card to container div
+    console.log("div", episodeDiv);
+    debugger
     allEp.appendChild(episodeDiv);
     rootElem.appendChild(allEp);
   });
@@ -126,22 +118,29 @@ function episodesSearch() {
 
 // create Episode Selector level 300
 
-function episodeSelector(allEpisodes) {
+function episodeSelector() {
   let selector = document.getElementById("select");
   selector.innerHTML = `<option value="All">Please choose episode</option>`;
 
-  allEpisodes.forEach((el) => {
-    console.log(el);
-    let options = document.createElement("option");
-    options.value = el.name;
-    options.text = `S${el.season.toString().padStart(2, "0")}E${el.number
-      .toString()
-      .padStart(2, "0")} - ${el.name}`;
+  if (selector) {
+    selector.innerHTML = "";
+  }
 
-    selector.appendChild(options);
-  });
+  // allEpisodes.forEach((episode) => {
+  //   let opt = document.createElement("option");
+  //   opt.value = episode.name;
+  //   opt.text = `S${episode.season
+  //     .toString()
+  //     .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${
+  //     episode.name
+  //   }`;
 
-  selector.addEventListener("change", function () {
+  //   selector.appendChild(opt);
+  // });
+
+  selector.addEventListener("change", selectCreator);
+
+  function selectCreator() {
     let selected = selector.value;
     let episodes = Array.from(document.getElementsByClassName("newDiv"));
 
@@ -154,9 +153,47 @@ function episodeSelector(allEpisodes) {
         episode.classList.add("hide");
       }
     });
-  });
+  }
 }
-
 
 episodeSelector();
 
+
+// level 400
+
+function allMovesShow() {
+  allMoves.forEach((element) => {
+    let moveOption = document.createElement("option");
+    moveOption.innerText = element.name;
+
+    movesList.appendChild(moveOption);
+  });
+}
+allMovesShow();
+
+// let allMyData;
+
+movesList.addEventListener("change", function () {
+  let moveSelector = movesList.value;
+  let selectedMove = allMoves.filter((Show) => moveSelector == Show.name);
+
+  let ShowId = selectedMove[0].id;
+
+  fetch(`https://api.tvmaze.com/shows/${ShowId}/episodes`)
+    .then((res) => {
+      if (res && res.ok) {
+        return res.json();
+      }
+    })
+    .then((data) => {
+      console.log("here is are", data);
+
+      allEpisodes = data;
+      makePageForEpisodes(allEpisodes);
+      episodeSelector(allEpisodes);
+    })
+    .catch((error) => {
+      console.log(`some thing wrong:`, error);
+      throw error;
+    });
+});
