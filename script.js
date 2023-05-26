@@ -4,7 +4,6 @@ function setup() {}
 
 window.onload = setup;
 
-
 // create all showList in the select bar level 400
 
 let allMoves = getAllShows();
@@ -19,7 +18,7 @@ allMoves.sort(function (y, z) {
 
 // create all episodes level 100
 
- let allEp = document.getElementById("allEp");
+let allEp = document.getElementById("allEp");
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -28,28 +27,25 @@ function makePageForEpisodes(episodeList) {
   //my code
 
   // create container div to hold all episodes
- 
 
   episodeList.map((el) => {
     // create div for each episode and give class div
     let episodeDiv = document.createElement("div");
     episodeDiv.classList.add("newDiv");
 
-
-    if(el.image){
-       episodeDiv.innerHTML = `
+    if (el.image) {
+      episodeDiv.innerHTML = `
     <h2> S${el.season.toString().padStart(2, "0")}E${el.number
-         .toString()
-         .padStart(2, "0")} - ${el.name} </h2>
+        .toString()
+        .padStart(2, "0")} - ${el.name} </h2>
     <img src="${el.image.medium}">
     <span>${el.summary}</span>
     `;
-
-    }else{
-       episodeDiv.innerHTML = `
+    } else {
+      episodeDiv.innerHTML = `
     <h2> S${el.season.toString().padStart(2, "0")}E${el.number
-         .toString()
-         .padStart(2, "0")} - ${el.name} </h2>
+        .toString()
+        .padStart(2, "0")} - ${el.name} </h2>
     <span>${el.summary}</span>
     `;
     }
@@ -109,11 +105,9 @@ function episodeSelector() {
   allEpisodes.forEach((episode) => {
     let opt = document.createElement("option");
     opt.value = episode.name;
-    opt.text = `S${episode.season
+    opt.text = `S${episode.season.toString().padStart(2, "0")}E${episode.number
       .toString()
-      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${
-      episode.name
-    }`;
+      .padStart(2, "0")} - ${episode.name}`;
 
     selector.appendChild(opt);
   });
@@ -138,17 +132,15 @@ function episodeSelector() {
 
 episodeSelector();
 
-
 // level 400
 
 //===== ** fetch for level 400 **
-
 
 function allMovesShow() {
   allMoves.forEach((element) => {
     let moveOption = document.createElement("option");
     moveOption.innerText = element.name;
-    
+
     movesList.appendChild(moveOption);
   });
 }
@@ -159,7 +151,7 @@ allMovesShow();
 movesList.addEventListener("change", function () {
   let moveSelector = movesList.value;
   let selectedMove = allMoves.filter((Show) => moveSelector == Show.name);
-  allEp.innerHTML = ""; 
+  allEp.innerHTML = "";
   let ShowId = selectedMove[0].id;
 
   fetch(`https://api.tvmaze.com/shows/${ShowId}/episodes`)
@@ -179,3 +171,51 @@ movesList.addEventListener("change", function () {
       throw error;
     });
 });
+
+
+// level 500
+
+let allMakeAllShow = document.getElementById("all-shows");
+
+function makeAllShows() {
+  allMoves.forEach((el) => {
+    let showsDiv = document.createElement("div");
+    showsDiv.classList.add("div-shows");
+
+    if (el.image) {
+    showsDiv.innerHTML = `
+    <h2>${el.name}</h2>
+    <div class="inside-div">
+    <img src="${el.image.medium}" />
+    <span>${el.summary}</span>
+    <div class="rating">
+    <ul>
+    <li>Rated: ${el.rating.average}</>
+    <li>Genres: ${el.genres}</>
+    <li>Status: ${el.status}</>
+    <li>Runtime: ${el.runtime}</>
+    </ul>
+    </div>
+    </div>
+    `;
+    } else {
+      showsDiv.innerHTML = `
+    <h2>${el.name}</h2>
+    <div class="inside-div">
+    <span>${el.summary}</span>
+    <div class="rating">
+    <ul>
+    <li>Rated: ${el.rating.average}</>
+    <li>Genres: ${el.genres}</>
+    <li>Status: ${el.status}</>
+    <li>Runtime: ${el.runtime}</>
+    </ul>
+    </div>
+    </div>
+    `;
+    }
+
+    allMakeAllShow.appendChild(showsDiv);
+  });
+}
+makeAllShows();
