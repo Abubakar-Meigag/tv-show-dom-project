@@ -106,7 +106,7 @@ input {
   height: auto;
   background-color: #14213d;
   color: #cbf5f7;
-  border-radius: 3%;
+  border-radius: 0.9rem;
   border: 1px solid #fca311;
   /* box-shadow: 0 14px 40px rgba(205, 202, 202, 0.619), 0 10px 10px rgba(0, 0, 0, 0.42); */
   /* box-shadow: 0 16px 24px 2px rgba(245, 186, 186, 0.183), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2); */
