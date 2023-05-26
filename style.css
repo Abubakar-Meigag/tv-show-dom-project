@@ -110,7 +110,7 @@ input {
   border: 1px solid #fca311;
   /* box-shadow: 0 14px 40px rgba(205, 202, 202, 0.619), 0 10px 10px rgba(0, 0, 0, 0.42); */
   /* box-shadow: 0 16px 24px 2px rgba(245, 186, 186, 0.183), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2); */
-  box-shadow: 0 8px 10px 1px rgba(241, 241, 229, 0.786), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(232, 234, 221, 0.562);
+  box-shadow: 0 8px 10px 1px rgba(241, 241, 229, 0.342), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(232, 234, 221, 0.562);
 }
 
 .inside-div {
