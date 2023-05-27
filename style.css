@@ -33,7 +33,7 @@ input {
   height: 15px;
 }
 
-#allEp {
+.allEp {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
@@ -58,8 +58,8 @@ input {
   background-color: #3d5a80;
   color: #cbf5f7;
   border-radius: 3%;
-  border: 1px solid #1c2a63;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.30), 0 10px 10px rgba(0, 0, 0, 0.42);
+  border: 1px solid #cbf5f7;
+  box-shadow: 0 14px 40px rgba(207, 204, 204, 0.331), 0 10px 10px rgba(0, 0, 0, 0.42);
 }
 
 .newDiv>h2 {
@@ -108,7 +108,7 @@ input {
   color: #cbf5f7;
   border-radius: 0.9rem;
   border: 1px solid #fca311;
-  /* box-shadow: 0 14px 40px rgba(205, 202, 202, 0.619), 0 10px 10px rgba(0, 0, 0, 0.42); */
+  /* box-shadow: 0 14px 40px rgba(205, 202, 202, 0.311), 0 10px 10px rgba(0, 0, 0, 0.42); */
   /* box-shadow: 0 16px 24px 2px rgba(245, 186, 186, 0.183), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2); */
   box-shadow: 0 8px 10px 1px rgba(241, 241, 229, 0.342), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(232, 234, 221, 0.562);
 }
