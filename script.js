@@ -116,7 +116,7 @@ function episodeSelector() {
 
   function selectCreator() {
     let selected = selector.value;
-    let episodes = Array.from(document.getElementsByClassName("newDiv"));
+    let episodes = Array.from(document.getElementsByClassName("newDiv"))
 
     episodes.filter((episode) => {
       let h2Element = episode.querySelector("h2");
@@ -153,6 +153,7 @@ movesList.addEventListener("change", function () {
   let selectedMove = allMoves.filter((Show) => moveSelector == Show.name);
   allEp.innerHTML = "";
   let ShowId = selectedMove[0].id;
+  allEp.classList.add("allEp");
 
   fetch(`https://api.tvmaze.com/shows/${ShowId}/episodes`)
     .then((res) => {
@@ -172,21 +173,21 @@ movesList.addEventListener("change", function () {
     });
 });
 
-
 // level 500
 
 let allMakeAllShow = document.getElementById("all-shows");
 
 function makeAllShows() {
-  allMoves.forEach((el) => {
+  allMoves.map((el) => {
     let showsDiv = document.createElement("div");
     showsDiv.classList.add("div-shows");
+    allEp.classList.remove("allEp");
 
     if (el.image) {
-    showsDiv.innerHTML = `
+      showsDiv.innerHTML = `
     <h2>${el.name}</h2>
     <div class="inside-div">
-    <img src="${el.image.medium}" />
+    <img src="${el.image.medium}" id="img-click" />
     <span>${el.summary}</span>
     <div class="rating">
     <ul>
@@ -215,7 +216,87 @@ function makeAllShows() {
     `;
     }
 
-    allMakeAllShow.appendChild(showsDiv);
+    allEp.appendChild(showsDiv);
   });
+
+const img = document.getElementById("img-click");
+
+img.addEventListener("click", function () {
+  for (let show of allEpisodes) {
+    const ShowDisPlay = show.id;
+    // event.target = show.id;
+   
+    fetch(`https://api.tvmaze.com/shows/${ShowDisPlay}/episodes`)
+      .then((res) => {
+        if (res && res.ok) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        console.log("here is are", data);
+        allEpisodes = data;
+        makePageForEpisodes(allEpisodes);
+      });
+  }
+});
+
 }
+
 makeAllShows();
+
+// const img = document.getElementById("img-click");
+
+// img.addEventListener("click", function () {
+//   for (let show of allMoves) {
+    
+//     const ShowDisPlay = show.id;
+//     // event.target = show.id;
+//     debugger
+//     fetch(`https://api.tvmaze.com/shows/${ShowDisPlay}/episodes`)
+//       .then((res) => {
+//         if (res && res.ok) {
+//           return res.json();
+//         }
+//       })
+//       .then((data) => {
+//         console.log("here is are", data);
+//         allEpisodes = data;
+//         makePageForEpisodes(allEpisodes);
+//       });
+//   }
+// });
+
+// function clickImg() {
+
+// }
+
+// clickImg();
+
+// fetch(`https://api.tvmaze.com/shows/${disPlayShow}/episodes`)
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then((result) => {
+//     makePageForEpisodes(result);
+//   });
+
+// function clickAllShows() {
+//   let clickShows = document.getElementById("shows-btn");
+//   clickShows.addEventListener("onclick", function () {});
+// }
+
+//     image.addEventListener("click", function () {
+//       let showId = show.id;
+//       fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
+//         .then(function (response) {
+//           return response.json();
+//         })
+//         .then((result) => {
+//           makePageForEpisodes(result);
+//         });
+//     });
+
+//     divEle.append(firstDiv, secondDiv, thirdDiv);
+//     showsEle.appendChild(divEle);
+//   }
+// }
