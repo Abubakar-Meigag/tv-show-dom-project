@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
-    <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  </head>
 
-  <body>
-    <div id="root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV Show Project | Abubakar Meigag (My GitHub Abubakar-Meigag)</title>
+  <link href="style.css" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+
+  <!-- all shows container div  -->
+  <div ></div>
+  <button id="shows-btn">
+    Click For Shows
+  </button>
+
+  <div id="all-search">
+
+    <!-- select bar for moves -->
+    <select name="moves-bar" id="moves-bar" class="moves-bar">
+    </select>
+
+    <!-- select bar for episodes  -->
+    <select name="select" id="select">
+    </select>
+
+    <!-- search input  -->
+    <div id="search">
+      <input id="searchInput forShow" onkeyup="episodesSearch(), searchForShow()" type="text" placeholder="Search">
+      <div id="search-count"></div>
+
+      <!-- No Results -->
+      <div id="no-result" class="hide">No results found - all this data is from TVMaze.com</div>
     </div>
+  </div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
 
-    <!-- Loads YOUR javascript code -->
-    <script src="script.js"></script>
-  </body>
+  <div id="root">
+  </div>
+
+  <!-- episodes container div  -->
+  <div id="allEp" class="allEp"></div>
+
+  <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+  <script src="episodes.js"></script>
+
+  <!-- Loads YOUR javascript code -->
+  <script src="shows.js"></script>
+  <script src="script.js"></script>
+</body>
+
 </html>
